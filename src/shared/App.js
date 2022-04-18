@@ -9,14 +9,16 @@ import { ConnectedRouter } from "connected-react-router";
 import Login from "../pages/Login"
 import Signup from "../pages/Signup"
 import Main from "../pages/Main"
+import Entrance from '../pages/Entrance';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
+      <Route path="/entrance" exact component={Entrance}/>
       <Route path="/" exact component={Main}/>
       <Route path="/login" exact component={Login}/>
-      <Route path="/sigup" exact component={Signup}/>
-    </div>
+      <Route path="/signup" exact component={Signup}/>
+    </BrowserRouter>
   );
 }
 
