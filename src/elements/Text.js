@@ -2,7 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-  const { bold, cursor, disp, color, size, children, margin, _onClick, text } = props;
+  const {
+    bold,
+    fontWeight,
+    cursor,
+    display,
+    color,
+    size,
+    children,
+    margin,
+    is_center,
+    verticalAlign,
+    textDecoration,
+    _onClick,
+    text,
+  } = props;
 
   const styles = {
     bold: bold,
@@ -10,14 +24,18 @@ const Text = (props) => {
     size: size,
     margin: margin,
     cursor: cursor,
-    disp: disp,
+    display: display,
     text: text,
+    fontWeight: fontWeight,
+    is_center: is_center,
+    verticalAlign: verticalAlign,
+    textDecoration: textDecoration,
   };
 
   return (
-    <P {...styles} onClick={_onClick}>
+    <Span {...styles} onClick={_onClick}>
       {children}
-    </P>
+    </Span>
   );
 };
 
@@ -26,23 +44,29 @@ Text.defaultProps = {
   children: null,
   bold: false,
   color: "#222831",
-  size: "14px",
+  size: "15px",
   margin: false,
-  cursor: "",
-  disp: "",
-  text: "",
+  display: "inline",
+  fontWeight: 700,
+  is_center: false,
+  verticalAlign: false,
+  textDecoration: "none",
 };
 
-const P = styled.p`
-  :hover {
-    cursor: ${(props) => props.cursor};
-  }
-  text-align: ${(props) => (props.text ? "center" : "")};
-  display: ${(props) => props.disp};
+const Span = styled.span`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
-  font-weight: ${(props) => (props.bold ? "600" : "400")};
+  font-weight: ${(props) => props.fontWeight};
+  box-sizing: border-box;
+  text-align: ${(props) => (props.text ? "center" : "")};
+  display: ${(props) => props.display};
+  vertical-align: ${(props) => props.verticalAlign};
+  text-decoration: ${(props) => props.textDecoration};
   ${(props) => (props.margin ? `margin:${props.margin}` : "")}
+  ${(props) =>
+    props.is_center
+      ? `display:flex; flex-direction:column; align-items:center; justify-content:center`
+      : ""}
 `;
 
 export default Text;
