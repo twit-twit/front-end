@@ -4,13 +4,13 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
 import post from "./modules/post"; 
-import user from "./modules/user" 
+//import user from "./modules/user" 
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   post,
-  user,
+  //user,
   router: connectRouter(history),
 });
 
@@ -34,6 +34,6 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-let store = (initialStore) => createStore(rootReducer, enhancer);
+const store = createStore(rootReducer, enhancer);
 
-export default store();
+export default store;
