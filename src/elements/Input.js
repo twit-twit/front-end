@@ -3,17 +3,33 @@ import styled from "styled-components";
 import { Text, Grid } from "./Index";
 
 const Input = (props) => {
-  const { label, placeholder, borderRadius, _onChange, type, multiLine, name } = props;
+  const {
+    label,
+    width,
+    rows,
+    placeholder,
+    borderRadius,
+    _onChange,
+    type,
+    multiLine,
+    name,
+  } = props;
 
   const styles = {
     borderRadius: borderRadius,
+    rows: rows,
+    width: width,
   };
 
   if (multiLine) {
     return (
       <Grid>
         {label && <Text margin="0px">{label}</Text>}
-        <ElTextarea rows={10} placeholder={placeholder} onChange={_onChange}></ElTextarea>
+        <ElTextarea
+          rows={rows}
+          placeholder={placeholder}
+          onChange={_onChange}
+        ></ElTextarea>
       </Grid>
     );
   }
@@ -22,7 +38,13 @@ const Input = (props) => {
     <React.Fragment>
       <Grid>
         {label && <Text margin="0px">{label}</Text>}
-        <ElInput name={name} {...styles} type={type} placeholder={placeholder} onChange={_onChange} />
+        <ElInput
+          name={name}
+          {...styles}
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+        />
       </Grid>
     </React.Fragment>
   );
@@ -36,6 +58,8 @@ Input.defaultProps = {
   type: "type",
   borderRadius: "5px",
   name: "name",
+  rows: "2",
+  width: "100%",
 };
 
 const ElTextarea = styled.textarea`
@@ -43,11 +67,12 @@ const ElTextarea = styled.textarea`
   width: 100%;
   padding: 12px 4px;
   box-sizing: border-box;
+  rows: ${(props) => props.rows};
 `;
 
 const ElInput = styled.input`
   border: 1px solid #212121;
-  width: 100%;
+  width: ${(props) => props.width};
   padding: 12px 4px;
   box-sizing: border-box;
   border-radius: ${(props) => props.borderRadius};

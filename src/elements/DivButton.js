@@ -18,6 +18,8 @@ const DivButton = (props) => {
     zIndex,
     cursor,
     verticalAlign,
+    borderRadius,
+    is_center,
     _onClick,
     children,
   } = props;
@@ -38,6 +40,8 @@ const DivButton = (props) => {
     zIndex: zIndex,
     cursor: cursor,
     verticalAlign: verticalAlign,
+    borderRadius: borderRadius,
+    is_center: is_center,
   };
 
   return (
@@ -67,6 +71,8 @@ DivButton.defaultProps = {
   zIndex: 0,
   cursor: "pointer",
   verticalAlign: false,
+  borderRadius: "9999px",
+  is_center: false,
 };
 
 const ElButton = styled.div`
@@ -86,10 +92,13 @@ const ElButton = styled.div`
   cursor: ${(props) => props.cursor};
   box-sizing: border-box;
   text-align: start;
-  border-radius: 9999px;
+  border-radius: ${(props) => props.borderRadius};
   vertical-align: ${(props) => props.verticalAlign};
-
-  /* ${(props) => (props.margin ? `margin:${props.margin}` : "")} */
+  ${(props) =>
+    props.is_center
+      ? `display:flex; flex-direction:column; align-items:center; justify-content:center`
+      : ""}
+      /* ${(props) => (props.margin ? `margin:${props.margin}` : "")} */
   /* ${(props) => (props.height ? `margin:${props.height}` : "")}
   ${(props) => (props.width ? `margin:${props.width}` : "")} // */
   /* position: ${(props) => props.position};

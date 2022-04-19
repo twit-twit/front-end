@@ -2,8 +2,23 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  const { margin, cursor, borderRadius, padding, width, bg, color, hvBtn, atvBoxSdwBtn, boxSdwBtn, text, _onClick, children } =
-    props;
+  const {
+    margin,
+    cursor,
+    borderRadius,
+    padding,
+    width,
+    height,
+    bg,
+    color,
+    hvBtn,
+    atvBoxSdwBtn,
+    boxSdwBtn,
+    text,
+    is_center,
+    _onClick,
+    children,
+  } = props;
 
   const styles = {
     margin: margin,
@@ -16,6 +31,8 @@ const Button = (props) => {
     padding: padding,
     borderRadius: borderRadius,
     cursor: cursor,
+    height: height,
+    is_center: is_center,
   };
 
   return (
@@ -33,6 +50,7 @@ Button.defaultProps = {
   _onClick: () => {},
   margin: false,
   width: "100%",
+  height: false,
   bg: "#C4C4C4",
   color: "white",
   hvBtn: "darkgray",
@@ -41,6 +59,7 @@ Button.defaultProps = {
   padding: "12px 0px",
   borderRadius: "5px",
   cursor: "default",
+  is_center: false,
 };
 
 const ElButton = styled.button`
@@ -53,13 +72,19 @@ const ElButton = styled.button`
   box-shadow: ${(props) => props.boxSdwBtn};
   cursor: ${(props) => props.cursor};
   width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background-color: ${(props) => props.bg};
   color: ${(props) => props.color};
   padding: ${(props) => props.padding};
   border-radius: ${(props) => props.borderRadius};
   box-sizing: border-box;
   border: none;
-  ${(props) => (props.margin ? `margin:${props.margin}` : "")}/* ${(props) =>
+  ${(props) => (props.margin ? `margin:${props.margin}` : "")}
+  ${(props) =>
+    props.is_center
+      ? `display:flex; flex-direction:column; align-items:center; justify-content:center`
+      : ""} 
+      /* ${(props) =>
     props.borderRadius ? `border-radius: ${props.borderRadius}` : ""}; */
 `;
 
