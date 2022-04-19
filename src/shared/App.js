@@ -12,6 +12,7 @@ import Login from "../pages/Login"
 import Signup from "../pages/Signup"
 import Main from "../pages/Main"
 import React from 'react';
+import Entrance from '../pages/Entrance';
 
 function App() {
   return (
@@ -24,8 +25,8 @@ function App() {
       </div>
     </ConnectedRouter>
     </React.Fragment>
-    
-    
+   
+
   );
 }
 
