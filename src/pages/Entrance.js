@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { Text, DivButton, TextBox, Grid, HrBox } from "../elements/Index";
 import SignupModal from "../components/SignupModal";
+import LoginModal from "../components/LoginModal";
 import { Modal, Button } from "react-bootstrap";
 
-const Entrance = (props) => {
+const Entrance = () => {
   const [signupModalOn, setSignupModalOn] = useState(false);
+  const [loginModalOn, setLoginModalOn] = useState(false);
   return (
     <div>
       <>
         <SignupModal
           show={signupModalOn}
           onHide={() => setSignupModalOn(false)}
+        />
+      </>
+      <>
+        <LoginModal
+          show={loginModalOn}
+          onHide={() => setLoginModalOn(false)}
         />
       </>
 
@@ -101,16 +109,16 @@ const Entrance = (props) => {
                 .
               </Text>
             </DivButton>
-            <div>
+            <Grid margin="40px 0 0 0">
               <DivButton border="none" display="block">
                 <Text size="17px">이미 트위터에 가입하셨나요?</Text>
               </DivButton>
-              <DivButton>
+              <DivButton _onClick={() => setLoginModalOn(true)}>
                 <TextBox is_center>
                   <Text is_center>로그인</Text>
                 </TextBox>
               </DivButton>
-            </div>
+            </Grid>
           </div>
         </Grid>
 

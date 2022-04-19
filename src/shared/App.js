@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 //import { Provider } from 'react-redux';
 import styled from "styled-components";
@@ -16,17 +17,16 @@ import Entrance from '../pages/Entrance';
 
 function App() {
   return (
-    <React.Fragment>
-      <ConnectedRouter history={history}>
+  <React.Fragment>
+    <ConnectedRouter history={history}>
       <div className="App">
+        <Route path="/entrance" exact component={Entrance}/>
         <Route path="/" exact component={Main}/>
         <Route path="/login" exact component={Login}/>
-        <Route path="/sigup" exact component={Signup}/>
+        <Route path="/signup" exact component={Signup}/>
       </div>
     </ConnectedRouter>
-    </React.Fragment>
-   
-
+  </React.Fragment>
   );
 }
 
