@@ -4,15 +4,16 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
 import User from "./modules/user";
-// import Post from "./modules/post";
 import Image from "./modules/image";
+import post from "./modules/post"; 
+
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   user: User,
-  // post: Post,
   image: Image,
+  post,
   router: connectRouter(history),
 });
 
@@ -36,6 +37,7 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-let store = (initialStore) => createStore(rootReducer, enhancer);
+const store = createStore(rootReducer, enhancer);
+
 
 export default store();
