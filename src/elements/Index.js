@@ -6,7 +6,5 @@ import DivButton from "./DivButton";
 import TextBox from "./TextBox";
 import HrBox from "./HrBox";
 import Image from "./Image"
-import AddButton from "./AddButton";
-import BaseBorder from "./BaseBorder";
 
-export { Grid, Text, Input, Button, DivButton, AddButton, TextBox, BaseBorder, HrBox, Image };
+export { Grid, Text, Input, Button, DivButton, TextBox, HrBox, Image };

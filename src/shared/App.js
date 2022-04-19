@@ -12,7 +12,6 @@ import { history } from "../redux/configureStore";
 import Login from "../pages/Login"
 import Signup from "../pages/Signup"
 import Main from "../pages/Main"
-import React from 'react';
 import Entrance from '../pages/Entrance';
 
 function App() {
