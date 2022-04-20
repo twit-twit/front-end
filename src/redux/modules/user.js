@@ -12,7 +12,7 @@ const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 
 //action creators
-const logOut = createAction(LOG_OUT, (user) => ({ user }));
+const logout = createAction(LOG_OUT, () => ({}));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 
@@ -26,7 +26,7 @@ const initialState = {
 const signupDB = (userId, password, confirmpassword, intro) => {
   return function (dispatch, getState, { history }) {
     axios
-      .post("http://13.125.34.252/api/users", {
+      .post("https://sparta-hs.shop/api/users", {
         userId: userId,
         password: password,
         confirmpassword: confirmpassword,
@@ -49,12 +49,13 @@ const signupDB = (userId, password, confirmpassword, intro) => {
 const loginDB = (userId, password) => {
   return function (dispatch, getState, { history }) {
     axios
-      .post("http://13.125.34.252/api/users/login", {
+      .post("https://sparta-hs.shop/api/users/login", {
         userId: userId,
         password: password,
       })
       .then((res) => {
-        // console.log(res.data.response.accessToken);
+        console.log(res)
+        // console.log(res.data.response.UserInfo.userCode);
         dispatch(
           setUser({
             userId: userId,
@@ -77,6 +78,13 @@ const loginDB = (userId, password) => {
   };
 };
 
+const logoutDB = () => {
+  return function (dispatch, getState) {
+    cookies.remove("isLogin");
+    cookies.remove("userCode");
+    cookies.remove("myJWT");
+  };
+};
 
 //reducer
 export default handleActions(
@@ -91,6 +99,7 @@ export default handleActions(
       produce(state, (draft) => {
         cookies.remove("myJWT");
         cookies.remove("isLogin");
+        cookies.remove("userCode");
         draft.user = null;
         draft.isLogin = false;
       }),
@@ -99,8 +108,10 @@ export default handleActions(
 );
 
 const actionCreators = {
+  logout,
   signupDB,
   loginDB,
+  logoutDB,
 };
 
 export { actionCreators };

@@ -21,8 +21,8 @@ function App() {
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Main} />
           <Route path="/entrance" exact component={Entrance} />
-          <Route path="/entrance/login" exact component={LoginModal} />
-          <Route path="/entrance/signup" exact component={SignupModal} />
+          {/* <Route path="/entrance/login" exact component={LoginModal} />
+          <Route path="/entrance/signup" exact component={SignupModal} /> */}
         </ConnectedRouter>
       </div>
     </React.Fragment>
