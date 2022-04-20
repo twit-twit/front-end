@@ -5,12 +5,13 @@ import { IoIosMore } from "react-icons/io";
 import styled from "styled-components";
 
 const Post = (props) => {
+  console.log(props);
   return (
       <PostBox>
           <Grid is_flex padding="16px" >
               <BB>
               <MyImage src="https://t1.daumcdn.net/cfile/tistory/263B293C566DA66B27"/>
-                 <Text>{props.user_info.userId}</Text>
+                 <Text>{props.userId}</Text>
                  <Btn>Follow</Btn> 
               </BB>
             <IoIosMore style={{margin:'-40px 0px 0px 0px'}} size="30px"/>

@@ -5,6 +5,7 @@ import Cookies from "universal-cookie";
 import moment from "moment";  //날짜 시간
 import { applyMiddleware } from "redux";
 import api from "../../shared/api";
+import FormData from 'form-data'
 
 const cookies = new Cookies();
 
@@ -19,12 +20,12 @@ const addPost = createAction(ADD_POST,(post) => ({post}));
 const deletePost = createAction(DELETE_POST,(post_id) => ({post_id}));
 
 //initialState 
-const initialState = {
-    Feeds: [],
-    postId: "",
-    userId: "",
-    image_url: [],
-    comment: "",
+const initialState = { 
+    list: [],
+    // postId: "",
+    // userId: "",
+    // image_url: [],
+    // comment: "",
   
 };
 
@@ -59,22 +60,38 @@ const getPostDB = () => {
 //게시글 생성
 const addPostDB = (post) => {
   const token = cookies.get("myJWT");   
+  
+  console.log(post);
   console.log("token",token);
+
+  
+
   return async function (dispatch, getState, { history }) {   
-     const formData = new FormData();
-     formData.append("file", post.file);
-     formData.append(
-       "postDtos",
-       new Blob([JSON.stringify({ contents: post.contents})], {
-         type: "application/json",
-       })
-     );
+    const formData = new FormData();
+    const userCode = cookies.get("userCode"); 
+    console.log(userCode);
+     formData.append("userCode",userCode);
+     formData.append("content",post.content);
+     formData.append("feedUrl",post.feedUrl);
+     formData.append("feedImage", post.feedImage);
+    
+     //formData.append("feedImage", post.feedImage);
+     
+    //  formData.append(
+    //    "postDtos",
+    //    new Blob([JSON.stringify({content: post.content, feedImage:post.feedImage })], {
+    //      type: "application/json",
+    //    })
+       
+    //  );
+     
+     
      await api({
        method: "post",
        url: "/api/feed",
        data: formData,
        headers: {
-           "Content-Type": `multipart/form-data`,
+           //"Content-Type": `multipart/form-data`,
            "authorization": `Bearer ${token}`
        },
        
@@ -82,6 +99,7 @@ const addPostDB = (post) => {
        .then((res) => {
          window.alert("업로드 되었습니다.");
          dispatch(addPost(post))
+         console.log(formData);
        })
        
        .catch((err) => {

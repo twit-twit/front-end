@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 const CenterBox = () => {
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post);
+  const post_list = useSelector((state) => state);
 
   console.log(post_list);
 
@@ -23,7 +23,7 @@ const CenterBox = () => {
   return (
       <div>
         <Text>ALL FEEDS</Text>
-        {/* {post_list.map((p, idx) => { return <Post key={idx} post={post_list} {...p} />; })} */}
+        {/* {post_list.map((p, idx) => { return <Post key={p.feedCode} post={post_list} {...p} />; })} */}
           <Post/>
           {/* {post_list && post_list.map((p, idx) => {
             return<Post{...p}/>
