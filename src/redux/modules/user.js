@@ -19,57 +19,85 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 //initialState
 const initialState = {
   user: null,
-  is_login: false,
+  isLogin: false,
 };
 
 //middleware
 const signupDB = (userId, password, confirmpassword, intro) => {
   return function (dispatch, getState, { history }) {
     axios
-      .post("http://3.36.98.164/api/users", {
+      .post("http://13.125.34.252/api/users", {
         userId: userId,
         password: password,
         confirmpassword: confirmpassword,
         intro: intro,
       })
-      .then((result) => {
+      .then((res) => {
         window.location.reload();
         window.alert("회원가입이 완료되었습니다.");
         history.replace("/entrance");
       })
-      .catch((result) => {
-        const errorCode = result.FAIL;
-        const errorMessage = result.message;
+      .catch((err) => {
+        const errorCode = err.FAIL;
+        const errorMessage = err.message;
 
         console.log(errorCode, errorMessage);
         // ..
       });
   };
 };
-// const loginFB = (id, pwd) => {
-//     return function (dispatch, getState, { history }) {
-//       auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then((res) => {
-//         auth
-//           .signInWithEmailAndPassword(id, pwd)
-//           .then((user) => {
-//             console.log(user);
-//             dispatch(setUser({ user_name: user.user.displayName, id: id, user_profile: "", uid: user.user.uid }));
-//             history.push("/");
-//           })
-//           .catch((error) => {
-//             const errorCode = error.code;
-//             const errorMessage = error.message;
-//             console.log(errorCode, errorMessage);
-//           });
-//       });
-//     };
-//   };
+const loginDB = (userId, password) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .post("http://13.125.34.252/api/users/login", {
+        userId: userId,
+        password: password,
+      })
+      .then((res) => {
+        // console.log(res.data.response.accessToken);
+        dispatch(
+          setUser({
+            userId: userId,
+          })
+        );
+        const accessToken = res.data.response.accessToken;
+        console.log(accessToken);
+        cookies.set("myJWT", accessToken, { path: "/" });
+        window.alert(`"${userId}"님 환영합니다`)
+        history.replace("/");
+        window.location.reload();
+      })
+      .catch((err) => {
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
+};
 
 //reducer
-export default handleActions({}, initialState);
+export default handleActions(
+  {
+    [SET_USER]: (state, action) =>
+      produce(state, (draft) => {
+        cookies.set("isLogin", "success");
+        draft.user = action.payload.user;
+        draft.isLogin = true;
+      }),
+    [LOG_OUT]: (state, action) =>
+      produce(state, (draft) => {
+        cookies.remove("myJWT");
+        cookies.remove("isLogin");
+        draft.user = null;
+        draft.isLogin = false;
+      }),
+  },
+  initialState
+);
 
 const actionCreators = {
   signupDB,
+  loginDB,
 };
 
 export { actionCreators };

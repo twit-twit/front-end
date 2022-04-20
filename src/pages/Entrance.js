@@ -7,19 +7,14 @@ import { Modal, Button } from "react-bootstrap";
 const Entrance = () => {
   const [signupModalOn, setSignupModalOn] = useState(false);
   const [loginModalOn, setLoginModalOn] = useState(false);
+  // console.log(loginModalOn);
   return (
     <div>
       <>
-        <SignupModal
-          show={signupModalOn}
-          onHide={() => setSignupModalOn(false)}
-        />
+        <SignupModal show={signupModalOn} onHide={() => setSignupModalOn(false)} />
       </>
       <>
-        <LoginModal
-          show={loginModalOn}
-          onHide={() => setLoginModalOn(false)}
-        />
+        <LoginModal show={loginModalOn} onHide={() => setLoginModalOn(false)} />
       </>
 
       <Grid is_middle>
@@ -56,12 +51,7 @@ const Entrance = () => {
                 <Text is_middle>Apple에서 가입하기</Text>
               </TextBox>
             </DivButton>
-            <DivButton
-              cursor="default"
-              border="none"
-              width="300px"
-              margin="4px"
-            >
+            <DivButton cursor="default" border="none" width="300px" margin="4px">
               <TextBox is_middle verticalAlign="middle">
                 <HrBox />
                 <Text display="flex" margin="12px">
@@ -124,10 +114,7 @@ const Entrance = () => {
 
         <Grid>
           <div>
-            <img
-              src={require("../static/images/lohp_1302x955.png")}
-              alt="svg"
-            />
+            <img src={require("../static/images/lohp_1302x955.png")} alt="svg" />
           </div>
         </Grid>
       </Grid>
