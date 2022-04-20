@@ -17,14 +17,14 @@ import Entrance from "../pages/Entrance";
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <div className="App">
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Main} />
           <Route path="/entrance" exact component={Entrance} />
-          <Route path="/entrance/login" exact component={LoginModal} />
-          <Route path="/entrance/signup" exact component={SignupModal} />
+          {/* <Route path="/entrance/login" exact component={LoginModal} />
+          <Route path="/entrance/signup" exact component={SignupModal} /> */}
         </ConnectedRouter>
-      </BrowserRouter>
+      </div>
     </React.Fragment>
   );
 }
