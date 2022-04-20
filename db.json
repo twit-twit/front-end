@@ -14,9 +14,6 @@
     }
   ],
   "users": {
-    "userId": "test1",
-    "password": "test1!",
-    "confirmPassword": "test1!",
-    "intro": "안녕하세요~"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQ29kZSI6IjEiLCJ1c2VySWQiOiJ0ZXN0MSJ9.0jcubmcsNsRx8dDWQGD3wIZaHorKIM-Necc77ghTenk"
   }
-}
+} 

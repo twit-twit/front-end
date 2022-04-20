@@ -1,22 +1,28 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { MdCropOriginal } from "react-icons/md";
 import { HiOutlineLink } from "react-icons/hi";
 import Grid from "../elements/Grid";
-import Upload from "../shared/Upload";
-import Image from "../elements/Image";
+//import Upload from "../shared/Upload";
 import styled from "styled-components";
 import { actionCreators as postActions } from "../redux/modules/post";
 
-const Header = () => {
+const HeaderBox = () => {
+    const dispatch = useDispatch();
+    const fileInput = useRef();
     const [contents, setContents] = useState("");
  
     const changeContents = (e) => {
       setContents(e.target.value);
   };
 
-    // const addPost = () => {
-    //   dispatch (postActions.addPostDB(contents))
-    // }
+    const addPostBtn = () => {
+      let image = fileInput.current.files[0];
+      console.log(image);
+  
+      dispatch(postActions.addPostDB({ contents: contents, image: image }));
+     };
+
 return (
     <div>
       <Text>Home</Text>
@@ -29,8 +35,17 @@ return (
       <Grid is_flex>
         <p><HiOutlineLink size="25" color="#5db1f4"/>
         < MdCropOriginal size="25" color="#5db1f4"/></p>
-        <Upload/>
-        <Btn >Tweet</Btn>
+           <form>
+             <input
+              cursor="pointer"
+              type="file"
+              name="file"
+              id="input-file"
+              encType="multipart/form-data"
+              ref={fileInput}
+             />
+           </form>
+        <Btn onClick={addPostBtn}>Tweet</Btn>
         {/* onClick={()=>{addPost}} */}
       </Grid>
         
@@ -84,5 +99,5 @@ const BB = styled.div`
   display: flex;
 `;
 
-export default Header;
+export default HeaderBox;
 
