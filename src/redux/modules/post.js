@@ -40,8 +40,8 @@ const getPostDB = () => {
           console.log(res);
         dispatch(getPost(res.data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         });
     };
   };

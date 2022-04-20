@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 //import { Provider } from 'react-redux';
 import styled from "styled-components";
 
@@ -9,23 +9,23 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 
 //페이지 임포트
-import Login from "../pages/Login"
-import Signup from "../pages/Signup"
-import Main from "../pages/Main"
-import Entrance from '../pages/Entrance';
+import LoginModal from "../components/LoginModal";
+import SignupModal from "../components/SignupModal";
+import Main from "../pages/Main";
+import Entrance from "../pages/Entrance";
 
 function App() {
   return (
-  <React.Fragment>
-    <ConnectedRouter history={history}>
-      <div className="App">
-        <Route path="/entrance" exact component={Entrance}/>
-        <Route path="/" exact component={Main}/>
-        <Route path="/login" exact component={Login}/>
-        <Route path="/signup" exact component={Signup}/>
-      </div>
-    </ConnectedRouter>
-  </React.Fragment>
+    <React.Fragment>
+      <BrowserRouter>
+        <ConnectedRouter history={history}>
+          <Route path="/" exact component={Main} />
+          <Route path="/entrance" exact component={Entrance} />
+          <Route path="/entrance/login" exact component={LoginModal} />
+          <Route path="/entrance/signup" exact component={SignupModal} />
+        </ConnectedRouter>
+      </BrowserRouter>
+    </React.Fragment>
   );
 }
 

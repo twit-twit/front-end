@@ -1,31 +1,29 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 // import Modal from "react-awesome-modal"
 import { Modal, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { Text, TextBox, DivButton, Input, Grid, Image } from "../elements/Index";
 import Upload from "../shared/Upload";
 import LoginModal from "./LoginModal";
 import { emailCheck, pwdCheck } from "../shared/common";
-import { useDispatch } from "react-redux";
 
-const SignupModal = ( { show, onHide }) => {
+const SignupModal = ({ show, onHide }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.image.preview);
   const [loginModalOn, setLoginModalOn] = useState(false);
-
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
   const [img, setImg] = useState("");
   const [intro, setIntro] = useState("");
-  console.log(userId);
-  console.log(password);
-  console.log(confirmpassword);
-  console.log(intro);
+  // console.log(userId);
+  // console.log(password);
+  // console.log(confirmpassword);
+  // console.log(intro);
 
   const signup = () => {
     if (userId === "") {
@@ -71,9 +69,9 @@ const SignupModal = ( { show, onHide }) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      {/* <>
+      <>
         <LoginModal show={loginModalOn} onHide={() => setLoginModalOn(false)} />
-      </> */}
+      </>
       <Grid is_flex>
         <Grid is_flex>
           <Grid>
