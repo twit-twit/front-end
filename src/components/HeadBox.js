@@ -10,25 +10,38 @@ import { actionCreators as postActions } from "../redux/modules/post";
 const HeaderBox = () => {
     const dispatch = useDispatch();
     const fileInput = useRef();
-    const [contents, setContents] = useState("");
+    const [content, setContent] = useState("");
+    const [feedImage, setFeedImage] = useState();
+    const [feedUrl, setFeedUrl] = useState("");
+    const[userCode,setuserCode] = useState("");
  
-    const changeContents = (e) => {
-      setContents(e.target.value);
+    const changeContent = (e) => {
+      setContent(e.target.value);
   };
+
+//   const changeContent = (e) => {
+//     setFeedImage(e.target.value);
+// };
+
+// const changeContent = (e) => {
+//   setFeedUrl(e.target.value);
+// };
 
     const addPostBtn = () => {
       let image = fileInput.current.files[0];
       console.log(image);
   
-      dispatch(postActions.addPostDB({ contents: contents, image: image }));
+      dispatch(postActions.addPostDB({userCode:userCode, content: content, feedImage:image , feedUrl: feedUrl}));
+      console.log(content, image, feedUrl);
      };
+     
 
 return (
     <div>
       <Text>Home</Text>
       <BB>
         <MyImage src="https://t1.daumcdn.net/cfile/tistory/263B293C566DA66B27"/>
-        <Input value={contents} onChange={changeContents} type="text" 
+        <Input value={content} onChange={changeContent} type="text" 
         placeholder="What's happening?"  maxLength={120} />
       </BB>
   
