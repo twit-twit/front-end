@@ -23,6 +23,7 @@ const CenterBox = () => {
   return (
       <div>
         <Text>ALL FEEDS</Text>
+        {/* {post_list.map((p, idx) => { return <Post key={idx} post={post_list} {...p} />; })} */}
           <Post/>
           {/* {post_list && post_list.map((p, idx) => {
             return<Post{...p}/>

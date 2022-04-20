@@ -61,8 +61,10 @@ const loginDB = (userId, password) => {
           })
         );
         const accessToken = res.data.response.accessToken;
+        const userCode = res.data.response.UserInfo.userCode;
         console.log(accessToken);
         cookies.set("myJWT", accessToken, { path: "/" });
+        cookies.set("userCode", userCode, { path: "/" });
         window.alert(`"${userId}"님 환영합니다`)
         history.replace("/");
         window.location.reload();
@@ -74,6 +76,7 @@ const loginDB = (userId, password) => {
       });
   };
 };
+
 
 //reducer
 export default handleActions(
