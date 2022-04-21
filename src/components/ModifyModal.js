@@ -4,8 +4,11 @@ import { useHistory } from "react-router-dom";
 import { actionCreators as userActions } from "../redux/modules/post";
 import { Text, TextBox, DivButton, Input, Grid, HrBox } from "../elements/Index";
 import { useSelector, useDispatch } from "react-redux";
+import { actionCreators } from "../redux/modules/post";
 
-const ModifyModal = ({ show, onHide }) => {
+const ModifyModal = ({show, onHide, _onClick }) => {
+  const dispatch = useDispatch();
+
   return (
     <div>
       <Modal
@@ -26,7 +29,12 @@ const ModifyModal = ({ show, onHide }) => {
               </DivButton>
             </Grid>
             <Grid is_center>
-              <DivButton is_center width="auto" margin="16px auto 0px auto">
+              <DivButton
+                is_center
+                width="auto"
+                margin="16px auto 0px auto"
+                _onClick={_onClick}
+              >
                 삭제하기
               </DivButton>
             </Grid>

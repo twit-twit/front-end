@@ -112,6 +112,7 @@ const deletePostDB = (feed_code) => {
       .then((res) => {
         //console.log(res);
         dispatch(deletePost(feed_code));
+        window.alert("삭제되었습니다")
         history.replace("/");
         window.location.reload();
       })
