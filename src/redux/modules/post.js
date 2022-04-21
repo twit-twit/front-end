@@ -17,7 +17,7 @@ const DELETE_POST = "DELETE_POST";
 //action creators
 const getPost = createAction(GET_POST,(post_list) => ({post_list}));
 const addPost = createAction(ADD_POST,(post) => ({post}));
-const deletePost = createAction(DELETE_POST,(post_id) => ({post_id}));
+const deletePost = createAction(DELETE_POST,(feed_code) => ({feed_code}));
 
 //initialState 
 const initialState = { 
@@ -83,6 +83,7 @@ const addPostDB = (post) => {
        .then((res) => {
          window.alert("업로드 되었습니다.");
          history.replace("/");
+         window.location.reload();
          dispatch(addPost(post))
          console.log(formData);
        })
@@ -94,22 +95,32 @@ const addPostDB = (post) => {
 };
 
 //게시글 삭제
-const deletePostDB = (post_id = null) => {
+const deletePostDB = (feed_code) => {
   const token = cookies.get("myJWT");   
+  const userCode = cookies.get("userCode"); 
+ 
+  console.log(feed_code);
   return async function (dispatch, getState, { history }) {
     await api
-      .delete(`/api/feed/${post_id}`, { post_id })
-      .then((doc) => {
-        dispatch(deletePost(post_id));
+      .delete("/api/feed", {
+        headers: { "authorization": `Bearer ${token}`},
+        params: {
+          feedCode: feed_code,
+          userCode: userCode
+        }  
+      })
+      .then((res) => {
+        //console.log(res);
+        dispatch(deletePost(feed_code));
         history.replace("/");
+        window.location.reload();
       })
       .catch((err) => {
-        window.alert("게시물 삭제에 문제가 있어요");
+        window.alert("게시물 삭제 실패");
         console.log("게시물 삭제 실패", err);
       });
   };
 };
-
 
 
 export default handleActions(
@@ -123,7 +134,8 @@ export default handleActions(
             //draft.mainData.unshift(action.payload.post);
         }),
         [DELETE_POST]: (state, action) => produce(state, (draft) => {
-        draft.post = draft.post.filter((a) => a.id !== action.payload.post_id);
+        draft.list = draft.list.filter((a) => a.feed_code !== action.payload.feed_code);
+        console.log(state, action);
       })
 
     },initialState

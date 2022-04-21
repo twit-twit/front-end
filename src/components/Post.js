@@ -3,18 +3,21 @@ import Grid from "../elements/Grid";
 import Image from "../elements/Image";
 import { IoIosMore } from "react-icons/io";
 import styled from "styled-components";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators } from "../redux/modules/post";
 
 const Post = (props) => {
+  const dispatch = useDispatch();
   console.log(props);
+
   return (
       <PostBox>
           <Grid is_flex padding="16px" >
               <BB>
               <MyImage src="https://t1.daumcdn.net/cfile/tistory/263B293C566DA66B27"/>
                  <Text>{props.userCode}</Text>
-                 <Btn>Follow</Btn> 
+                 <Btn onC>Follow</Btn> 
+                 <button onClick={() => {dispatch(actionCreators.deletePostDB(props.feedCode))}}>삭제</button>
               </BB>
             <IoIosMore style={{margin:'-40px 0px 0px 0px'}} size="30px"/>
           </Grid>
