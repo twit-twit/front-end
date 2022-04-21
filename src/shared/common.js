@@ -7,7 +7,7 @@ export const emailCheck = (email) => {
 
 export const pwdCheck = (pwd) => {
   //대소문자, 숫자, 특수문자(!@#$%^&*)가 섞인 4자 이상 20자 미만       
-  let _reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{3,19}$/;
+  let _reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{3,19}$/;
 
   return _reg.test(pwd);
 };
