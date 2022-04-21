@@ -42,7 +42,7 @@ return (
       <BB>
         <MyImage src="https://t1.daumcdn.net/cfile/tistory/263B293C566DA66B27"/>
         <Input value={content} onChange={changeContent} type="text" 
-        placeholder="What's happening?"  maxLength={120} />
+        placeholder="What's happening?"  maxLength={300} />
       </BB>
   
       <Grid is_flex>

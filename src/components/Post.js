@@ -4,22 +4,36 @@ import Image from "../elements/Image";
 import DivButton from "../elements/DivButton";
 import { IoIosMore } from "react-icons/io";
 import styled from "styled-components";
+
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators } from "../redux/modules/post";
+
 import ModifyModal from "../components/ModifyModal";
 
 const Post = (props) => {
   const [modifyModalOn, setModifyModalOn] = useState(false);
+  const dispatch = useDispatch();
   console.log(props);
+
   return (
     <div>
       <>
         <ModifyModal show={modifyModalOn} onHide={() => setModifyModalOn(false)} />
       </>
       <PostBox>
+
+          
+             
+                
+                
+              
+
         <Grid is_flex padding="16px">
           <BB>
             <MyImage src="https://t1.daumcdn.net/cfile/tistory/263B293C566DA66B27" />
             <Text>{props.userCode}</Text>
             <Btn>Follow</Btn>
+         <button onClick={() => {dispatch(actionCreators.deletePostDB(props.feedCode))}}>삭제</button>
           </BB>
           <DivButton is_center width="auto" border="none">
             <IoIosMore
@@ -38,6 +52,7 @@ const Post = (props) => {
         <Grid padding="50px">
           <Image shape="rectangle" alt="profile" src={`https://sparta-hs.shop${props.feedImage}`} />
         </Grid>
+
       </PostBox>
     </div>
   );
