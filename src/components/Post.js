@@ -1,40 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "../elements/Grid";
 import Image from "../elements/Image";
+import DivButton from "../elements/DivButton";
 import { IoIosMore } from "react-icons/io";
 import styled from "styled-components";
+
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/post";
 
+import ModifyModal from "../components/ModifyModal";
+
 const Post = (props) => {
+  const [modifyModalOn, setModifyModalOn] = useState(false);
   const dispatch = useDispatch();
   console.log(props);
 
   return (
+    <div>
+      <>
+        <ModifyModal show={modifyModalOn} onHide={() => setModifyModalOn(false)} />
+      </>
       <PostBox>
-          <Grid is_flex padding="16px" >
-              <BB>
-              <MyImage src="https://t1.daumcdn.net/cfile/tistory/263B293C566DA66B27"/>
-                 <Text>{props.userCode}</Text>
-                 <Btn onC>Follow</Btn> 
-                 <button onClick={() => {dispatch(actionCreators.deletePostDB(props.feedCode))}}>삭제</button>
-              </BB>
-            <IoIosMore style={{margin:'-40px 0px 0px 0px'}} size="30px"/>
-          </Grid>
-          <Textt style={{margin:'-40px 0px 5px -145px'}}>{props.createdAt}</Textt>
-          <Grid padding="50xpx">
-              <Textt style={{margin:'10px 0px 5px -10px'}}>{props.content}</Textt>
-          </Grid>
-          <Grid padding="50px">
-              <Image shape="rectangle" alt="profile" src={`https://sparta-hs.shop${props.feedImage}`}/>
-          </Grid>
+
+          
+             
+                
+                
+              
+
+        <Grid is_flex padding="16px">
+          <BB>
+            <MyImage src="https://t1.daumcdn.net/cfile/tistory/263B293C566DA66B27" />
+            <Text>{props.userCode}</Text>
+            <Btn>Follow</Btn>
+         <button onClick={() => {dispatch(actionCreators.deletePostDB(props.feedCode))}}>삭제</button>
+          </BB>
+          <DivButton is_center width="auto" border="none">
+            <IoIosMore
+              style={{ margin: "0px 0px 0px 0px" }}
+              size="30px"
+              onClick={() => {
+                setModifyModalOn(true);
+              }}
+            />
+          </DivButton>
+        </Grid>
+        <Textt style={{ margin: "-40px 0px 5px -145px" }}>{props.createdAt}</Textt>
+        <Grid padding="50xpx">
+          <Textt style={{ margin: "10px 0px 5px -10px" }}>{props.content}</Textt>
+        </Grid>
+        <Grid padding="50px">
+          <Image shape="rectangle" alt="profile" src={`https://sparta-hs.shop${props.feedImage}`} />
+        </Grid>
+
       </PostBox>
-      
-  ); 
+    </div>
+  );
 };
 
 // Post.defaultProps = {
-    
+
 //     user_info:{
 //         userId: "daun",
 //         image: "https://ifh.cc/g/WBsSQN.png"
@@ -59,14 +84,14 @@ const Btn = styled.button`
 `;
 
 const PostBox = styled.div`
-    width: 600px;
-    //height: 1437px;
-    border: 1px solid #EFF3F4;
-    background-color: #FFFFFF;
-    max-width: 600px;
+  width: 600px;
+  //height: 1437px;
+  border: 1px solid #eff3f4;
+  background-color: #ffffff;
+  max-width: 600px;
 
   :hover {
-    background-color: #EFF3F4;
+    background-color: #eff3f4;
   }
 `;
 const BB = styled.div`
@@ -78,7 +103,7 @@ const MyImage = styled.img`
   height: 55px;
   width: 55px;
   margin: 10px 0px 10px 0px;
-  border-radius: 50%
+  border-radius: 50%;
 `;
 const Text = styled.div`
   width: 50px;
@@ -98,7 +123,3 @@ const Textt = styled.div`
   color: #3e3d3d;
 `;
 export default Post;
-
-
-
-
