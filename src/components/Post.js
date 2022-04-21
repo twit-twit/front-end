@@ -4,6 +4,8 @@ import Image from "../elements/Image";
 import { IoIosMore } from "react-icons/io";
 import styled from "styled-components";
 
+
+
 const Post = (props) => {
   console.log(props);
   return (
@@ -11,33 +13,33 @@ const Post = (props) => {
           <Grid is_flex padding="16px" >
               <BB>
               <MyImage src="https://t1.daumcdn.net/cfile/tistory/263B293C566DA66B27"/>
-                 <Text>{props.userId}</Text>
+                 <Text>{props.userCode}</Text>
                  <Btn>Follow</Btn> 
               </BB>
             <IoIosMore style={{margin:'-40px 0px 0px 0px'}} size="30px"/>
           </Grid>
-          <Textt style={{margin:'-40px 0px 5px -145px'}}>{props.insert_dt}</Textt>
+          <Textt style={{margin:'-40px 0px 5px -145px'}}>{props.createdAt}</Textt>
           <Grid padding="50xpx">
-              <Textt style={{margin:'10px 0px 5px -10px'}}>{props.contents}</Textt>
+              <Textt style={{margin:'10px 0px 5px -10px'}}>{props.content}</Textt>
           </Grid>
           <Grid padding="50px">
-              <Image shape="rectangle" src={props.src}/>
+              <Image shape="rectangle" alt="profile" src={`https://sparta-hs.shop${props.feedImage}`}/>
           </Grid>
       </PostBox>
       
   ); 
 };
 
-Post.defaultProps = {
+// Post.defaultProps = {
     
-    user_info:{
-        userId: "daun",
-        image: "https://ifh.cc/g/WBsSQN.png"
-    },
-    image_url:"https://ifh.cc/g/40ohfh.jpg",
-    contents:"아아아아아아앙아아앙아아ㅏㅏ졸려ㅕㅕㅕㅕㅕㅕㅕㅕㅕㅕㅕ",
-    insert_dt: "2022-04-16 10:00:00",
-};
+//     user_info:{
+//         userId: "daun",
+//         image: "https://ifh.cc/g/WBsSQN.png"
+//     },
+//     image_url:"https://ifh.cc/g/40ohfh.jpg",
+//     contents:"아아아아아아앙아아앙아아ㅏㅏ졸려ㅕㅕㅕㅕㅕㅕㅕㅕㅕㅕㅕ",
+//     insert_dt: "2022-04-16 10:00:00",
+// };
 
 const Btn = styled.button`
   height: 36px;

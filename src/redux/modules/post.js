@@ -22,11 +22,6 @@ const deletePost = createAction(DELETE_POST,(post_id) => ({post_id}));
 //initialState 
 const initialState = { 
     list: [],
-    // postId: "",
-    // userId: "",
-    // image_url: [],
-    // comment: "",
-  
 };
 
 // middlewares
@@ -74,16 +69,6 @@ const addPostDB = (post) => {
      formData.append("content",post.content);
      formData.append("feedUrl",post.feedUrl);
      formData.append("feedImage", post.feedImage);
-    
-     //formData.append("feedImage", post.feedImage);
-     
-    //  formData.append(
-    //    "postDtos",
-    //    new Blob([JSON.stringify({content: post.content, feedImage:post.feedImage })], {
-    //      type: "application/json",
-    //    })
-       
-    //  );
      
      
      await api({
@@ -91,13 +76,13 @@ const addPostDB = (post) => {
        url: "/api/feed",
        data: formData,
        headers: {
-           //"Content-Type": `multipart/form-data`,
            "authorization": `Bearer ${token}`
        },
        
      })
        .then((res) => {
          window.alert("업로드 되었습니다.");
+         history.replace("/");
          dispatch(addPost(post))
          console.log(formData);
        })
@@ -130,7 +115,8 @@ const deletePostDB = (post_id = null) => {
 export default handleActions(
     {
         [GET_POST]: (state, action) => produce(state, (draft) => {
-            draft.list = action.payload.post_list;
+          console.log(state);
+            draft.list = action.payload.post_list.results;
         }),
         [ADD_POST]: (state, action) => produce(state, (draft) =>{
             draft.post = action.payload.post;
